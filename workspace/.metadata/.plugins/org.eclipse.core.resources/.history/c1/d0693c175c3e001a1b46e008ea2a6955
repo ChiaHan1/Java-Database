@@ -1,0 +1,32 @@
+package test;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import databaseproject1.DatabaseProject1;
+
+public class Authentication_Test {
+
+	public static void main(String[] args) {
+		
+		
+	}
+	
+	void createConnection () {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "982026962");
+			System.out.println ("Database Connection Success");
+			
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(DatabaseProject1.class.getName()).log(Level.SEVERE, null, ex);
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(DatabaseProject1.class.getName()).log(Level.SEVERE, null, ex);			
+			
+		}
+	}
+	
+}

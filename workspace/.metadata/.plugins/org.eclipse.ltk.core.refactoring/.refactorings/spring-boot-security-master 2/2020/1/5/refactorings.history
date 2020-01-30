@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;io.javabrains.springbootsecurity.SecurityConfiguration&apos; to &apos;SecurityConfiguration_1&apos;&#x0A;- Original project: &apos;spring-boot-security-master 2&apos;&#x0A;- Original element: &apos;io.javabrains.springbootsecurity.SecurityConfiguration&apos;&#x0A;- Renamed element: &apos;io.javabrains.springbootsecurity.SecurityConfiguration_1&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;SecurityConfiguration&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;io.javabrains.springbootsecurity{SecurityConfiguration.java[SecurityConfiguration" matchStrategy="1" name="SecurityConfiguration_1" qualified="false" references="true" similarDeclarations="false" stamp="1580274860622" textual="false" version="1.0"/>
+</session>

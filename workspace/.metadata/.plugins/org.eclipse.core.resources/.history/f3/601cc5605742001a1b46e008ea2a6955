@@ -1,0 +1,5 @@
+package io.javabrains.springbootsecurity;
+
+public class SecurityConfiguration {
+
+}

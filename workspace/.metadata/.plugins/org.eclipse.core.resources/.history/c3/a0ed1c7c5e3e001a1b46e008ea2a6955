@@ -1,0 +1,82 @@
+package test;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+
+public class Authentication extends JFrame {
+	
+	private JPanel contentPane;
+	Connection con;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Authentication frame = new Authentication();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Authentication() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 300, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		createConnection();
+		
+		JLabel userNameLabel = new JLabel("Username");
+		userNameLabel.setBounds(30, 43, 96, 22);
+		contentPane.add(userNameLabel);
+		
+		JLabel emailLabel = new JLabel("Email");
+		emailLabel.setBounds(30, 95, 96, 22);
+		contentPane.add(emailLabel);
+		
+		
+		
+		
+		
+	}
+	
+	/******************************************************************************************
+	 * load the SQL driver to the program.
+	 ******************************************************************************************/
+	void createConnection () {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "982026962");
+			System.out.println ("Database Connection Success");
+			
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Authentication.class.getName()).log(Level.SEVERE, null, ex);
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(Authentication.class.getName()).log(Level.SEVERE, null, ex);			
+			
+		}
+	}
+}

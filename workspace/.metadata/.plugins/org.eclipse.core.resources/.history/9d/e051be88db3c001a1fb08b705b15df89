@@ -1,0 +1,130 @@
+package databaseproject1;
+
+import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class DB2 extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField input;
+	Connection con;
+	private JTextField ageInput;
+
+	/******************************************************************************************
+	 * Launch the application.
+	 ******************************************************************************************/
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DB2 frame = new DB2();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/******************************************************************************************
+	 * Create the frame.
+	 ******************************************************************************************/
+	public DB2() {
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 400, 500);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		createConnection();
+		
+		input = new JTextField();
+		input.setColumns(10);
+		
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					String 	name 	= input.getText();
+					int 	age 	= Integer.parseInt(ageInput.getText());
+					
+					PreparedStatement stmt = con.prepareStatement ("INSERT INTO USERS2 VALUES (?,?)");
+					stmt.setString(1, name);
+					stmt.setInt(2, age);
+					
+					stmt.execute();
+					System.out.println ("Insertion Completed");
+					stmt.close();
+					
+				} catch (SQLException ex) {
+					Logger.getLogger(DB2.class.getName()).log(Level.SEVERE, null, ex);
+					
+				}
+			
+			}
+		});
+		
+		ageInput = new JTextField();
+		ageInput.setColumns(10);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(input, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(ageInput, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+					.addComponent(btnInsert)
+					.addGap(21))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(58)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(input, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+						.addComponent(ageInput, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnInsert))
+					.addContainerGap(197, Short.MAX_VALUE))
+		);
+		contentPane.setLayout(gl_contentPane);
+		
+	}
+	
+	/******************************************************************************************
+	 * load the SQL driver to the program.
+	 ******************************************************************************************/
+	void createConnection () {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "982026962");
+			System.out.println ("Database Connection Success");
+			
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(DatabaseProject1.class.getName()).log(Level.SEVERE, null, ex);
+			
+		} catch (SQLException ex) {
+			Logger.getLogger(DatabaseProject1.class.getName()).log(Level.SEVERE, null, ex);			
+			
+		}
+	}
+}
