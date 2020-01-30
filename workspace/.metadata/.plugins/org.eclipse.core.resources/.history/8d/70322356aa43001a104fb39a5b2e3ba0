@@ -19,8 +19,6 @@ import java.awt.event.ActionEvent;
 
 public class Register extends JFrame {
 	
-	public static final long serialVersionUID = 2L;
-	
 	private JPanel contentPane;
 	Connection con;
 	private JTextField usernameInput;
